@@ -1,5 +1,5 @@
 package com.walletapp;
-
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,10 +7,14 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@RequestMapping(value ="/v1")
+@CrossOrigin(value = "http://localhost:4200/")
 public class WalletController {
 
     @Autowired
-    private WalletService walletService;
+    private WalletService walletService ;
+
+    @RequestMapping(method = RequestMethod.GET,value = "/")
 
     @GetMapping("/")
     public String greet(){

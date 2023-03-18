@@ -1,6 +1,7 @@
 package com.walletapp;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -9,6 +10,7 @@ public class WalletDto { // POJO
 
     @NotNull(message = "Id can be null")
     @Id
+    @GeneratedValue
     private Integer id;
     private String name;
     private Double balance;

@@ -1,14 +1,11 @@
 package com.walletapp;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@Repository
-public class WalletRepositoryImpl implements WalletRepository{
+//@Repository
+public class CollectionWalletRepositoryImpl implements CollectionWalletRepository {
 
     private Map<Integer,WalletDto> walletMap = new HashMap<>();
 

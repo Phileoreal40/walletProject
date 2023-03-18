@@ -5,13 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.springframework.test.util.AssertionErrors.assertEquals;
-
 @SpringBootTest
-public class WalletRepositoryTests {
+public class CollectionWalletRepositoryTests {
 
     @Autowired
-    private WalletRepository walletRepository;
+    private CollectionWalletRepository walletRepository;
 
 
     @BeforeEach

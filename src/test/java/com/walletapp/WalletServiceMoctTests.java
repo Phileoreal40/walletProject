@@ -15,7 +15,7 @@ public class WalletServiceMoctTests {
     private WalletService walletService;
 
     @MockBean
-    private WalletRepository walletRepository;
+    private CollectionWalletRepository walletRepository;
 
     @Test
     public void testServiceWithOutActualRepository() throws  WalletException {
