@@ -1,8 +1,9 @@
 package com.walletapp;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,44 +17,69 @@ public class WalletController {
 
     @RequestMapping(method = RequestMethod.GET,value = "/")
 
-    @GetMapping("/")
+   // @GetMapping("/")
     public String greet(){
-        return "Hello welcome to wallet app.";
+        return " Welcome to wallet app.";
     }
 
-    @PostMapping("wallet")
-    public WalletDto registerWallet(@RequestBody WalletDto wallet) throws WalletException {
-        return this.walletService.registerWallet(wallet);
+
+
+    @GetMapping("/wallet/{id}")
+    public WalletDto getWalletById(@PathVariable Integer id) throws WalletException {
+        return walletService.getWalletById(id);
+    }
+    @PostMapping("/wallet")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public WalletDto addResource(@Valid @RequestBody WalletDto wallet) throws WalletException {
+        return walletService.registerWallet(wallet);
+    }
+    @PutMapping("/wallet")
+    public WalletDto replaceResource(@Valid @RequestBody WalletDto wallet) throws WalletException {
+        return walletService.updateWallet(wallet);
+    }
+    @DeleteMapping("/wallet/{walletId}")
+    public WalletDto deleteResource(@PathVariable("walletId") Integer walletId) throws WalletException {
+     return walletService.deleteWalletById(walletId);
     }
 
-    @GetMapping("wallet/{id}")
-    public WalletDto getWalletById(@PathVariable("id") Integer walletId) throws WalletException {
-        return this.walletService.getWalletById(walletId);
+    @PatchMapping("/wallet/{id}/name/{walletName}")
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+        public String updateResourceName(@PathVariable("id")Integer walletId,@PathVariable("walletName")String walletName) {
+        return  "Patch !"+walletId+":"+walletName;
     }
-    @PutMapping("wallet")
-    public WalletDto updateWallet(@RequestBody WalletDto wallet) throws WalletException {
-        return this.walletService.updateWallet(wallet);
-    }
-    @DeleteMapping("wallet/{id}")
-    public WalletDto deleteWallet(@PathVariable("id") Integer walletId) throws WalletException {
-     return this.walletService.deleteWalletById(walletId);
-    }
-
-    @PatchMapping("wallet/{id}/{amount}")
-    public Double addFundsToWalletById(@PathVariable("id")Integer walletId,@PathVariable("amount") Double amount) throws WalletException {
-        return this.walletService.addFundsToWalletById(walletId,amount);
-    }
-    @PatchMapping("wallet/{id}/fund/{amount}")
-    public Double withdrawFundsfromWalletById(@PathVariable("id")Integer walletId,@PathVariable("amount") Double amount) throws WalletException {
-        return this.walletService.withdrawFundsFromWalletById(walletId,amount);
-    }
-
-    @PostMapping("wallet/fund")
-    public Boolean fundTransfer(@RequestBody WalletTransferDto walletTransferDto) throws WalletException {
-        return this.walletService.fundTransfer(walletTransferDto.getFromId(),walletTransferDto.getToId(),walletTransferDto.getAmount());
-    }
-    @GetMapping("wallets")
-    public Collection<WalletDto> getAllWallets(){
+    @GetMapping("wallet")
+    public List<WalletDto> getAllEmployees(){
         return this.walletService.getAllWallets();
     }
+
+    @Autowired
+    private WalletJpaRepository walletJpaRepository;
+    @GetMapping("wallets/name/{name}")
+    public List<WalletDto> getAllWalletsHavingName(@PathVariable("name") String name){
+        return this.walletJpaRepository.findByName(name);
+    }
+    @GetMapping("wallets/contain/{name}")
+    public List<WalletDto> getAllWalletsContainingName(@PathVariable("name") String name){
+        return this.walletJpaRepository.findByNameContaining(name);
+    }
+
+    @GetMapping("wallets/balance/{minbalance}/{maxbalance}")
+    public List<WalletDto> findAllWalletsHavingBalanceBetween(@PathVariable("minBalance") Double minBalance,
+                                                                 @PathVariable("maxBalance")Double maxBalance){
+        return this.walletJpaRepository.findByBalanceBetweenOrderByBalanceDesc(minBalance,maxBalance);
+
+    }
+
+    @GetMapping("custom/wallets")
+    public List<WalletDto> findAllWallets(){
+        return this.walletJpaRepository.getAllWallets();
+    }
+
+    @GetMapping("custom/wallets/{name}")
+    public List<WalletDto> findAllwalletsHavingName(@PathVariable("name") String name){
+        return this.walletJpaRepository.getAllwalletsHavingNameLike("%"+name+"%");
+    }
+
+
+
 }

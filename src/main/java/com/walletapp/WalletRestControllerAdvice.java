@@ -5,17 +5,18 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import java.util.HashMap;
 import java.util.Map;
-@RestControllerAdvice
-public class WalletControllerAdvice {
+
+public class WalletRestControllerAdvice {
 
     @ExceptionHandler(WalletException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String handleWalletExceptions(WalletException e){
-     return e.getMessage();
+    public String handleEmployeeException(WalletException e){
+        return e.getMessage();
     }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -28,6 +29,4 @@ public class WalletControllerAdvice {
         });
         return errors;
     }
-
 }
-
