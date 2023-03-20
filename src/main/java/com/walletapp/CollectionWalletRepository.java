@@ -3,10 +3,10 @@ package com.walletapp;
 import java.util.Collection;
 
 public interface CollectionWalletRepository {
-    WalletDto addWallet(WalletDto wallet);
-    WalletDto getWallet(Integer  id);
+    WalletDto createWallet(WalletDto wallet);
+    WalletDto getWalletById(Integer  id);
     WalletDto updateWallet(WalletDto walletDto);
-    WalletDto deleteWallet(Integer walletId);
-
+    WalletDto deleteWalletById(Integer walletId);
+    public Collection<WalletDto> getAllWallets();
 }
 

@@ -9,26 +9,31 @@ public class CollectionWalletRepositoryImpl implements CollectionWalletRepositor
 
     Map<Integer, WalletDto> walletDtoMap = new HashMap<>();
 
-    @Override
-    public WalletDto addWallet(WalletDto wallet) {
+
+    public WalletDto createWallet(WalletDto wallet) {
         this.walletDtoMap.put(wallet.getId(), wallet);
         return wallet;
     }
 
-    @Override
-    public WalletDto getWallet(Integer id) {
+
+    public WalletDto getWalletById(Integer id) {
         return walletDtoMap.get(id);
     }
 
-    @Override
+
     public WalletDto updateWallet(WalletDto walletDto) {
-        return walletDtoMap.replace(walletDto.getId(), walletDto);
+       walletDtoMap.replace(walletDto.getId(), walletDto);
+       return walletDto;
     }
 
-    @Override
-    public WalletDto deleteWallet(Integer walletId) {
 
-        return this.walletDtoMap.remove(walletId);
+    public WalletDto deleteWalletById(Integer walletId) {
+
+       walletDtoMap.remove(walletId);
+       return walletDtoMap.get(walletId);
     }
+    public Collection<WalletDto> getAllWallets() {
 
+        return  this.walletDtoMap.values();
+    }
 }

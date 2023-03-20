@@ -1,16 +1,24 @@
 package com.walletapp;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface WalletService {
 
-    WalletDto registerWallet(WalletDto newWallet);
-    WalletDto getWalletById(Integer walletId) throws WalletException;
+    WalletDto createWallet(WalletDto newWallet);
+    WalletDto getWalletByID(Integer walletId) throws WalletException;
     WalletDto updateWallet(WalletDto wallet)throws WalletException;
     WalletDto deleteWalletById(Integer walletId)throws WalletException;
+    Double addFunds(Integer id, Double amount) throws WalletException;
+
+    Double withdrawFunds(Integer id, Double amount) throws WalletException;
+
+    String tranfersFunds(Integer fromId, Integer toId, Double amount) throws WalletException;
 
 
 
+   public Collection<WalletDto> getAllWallets();
 
-    List<WalletDto> getAllWallets();
+
+
 }
