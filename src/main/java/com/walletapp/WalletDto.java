@@ -20,7 +20,7 @@ public class WalletDto {
         dateOfJoiningBalance= dateOfJoiningBalance;
     }
 
-
+@GeneratedValue
     @NotNull(message = "Id cant be null")
     @Id
     private Integer id;
