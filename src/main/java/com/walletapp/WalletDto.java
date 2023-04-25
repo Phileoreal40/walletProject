@@ -10,15 +10,11 @@ import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.util.Objects;
 @Entity
 public class WalletDto {
-    public WalletDto(Integer id, String name, Double balance, LocalDate dateOfJoiningBalance) {
-        this.id = id;
-        this.name = name;
-        this.balance = balance;
-        dateOfJoiningBalance= dateOfJoiningBalance;
-    }
+
 
 @GeneratedValue
     @NotNull(message = "Id cant be null")
@@ -27,28 +23,24 @@ public class WalletDto {
 
     @NotBlank(message = "Name cant be blank")
     @Pattern(regexp = "[a-zA-Z]{3,20}", message = "Name should contain 3 - 20 character and no special characters allowed")
+
     private String name;
     private Double balance;
-    private LocalDate dateOfJoiningBalance;
+    private String dateOfJoiningBalance;
 
-    public LocalDate getdateOfJoiningBalance() {
-        return dateOfJoiningBalance;
-    }
-
-    public void setdateOfJoiningBalance(LocalDate dateOfJoiningBalance) {
-        dateOfJoiningBalance = dateOfJoiningBalance;
-    }
-
-    public WalletDto(Integer id, String name, Double balance) {
+    public WalletDto(Integer id, String name, Double balance, String dateOfJoiningBalance) {
         this.id = id;
         this.name = name;
         this.balance = balance;
+        this.dateOfJoiningBalance = LocalDateTime.now().toString();
 
     }
 
     public WalletDto() {
 
     }
+
+
 
     public Integer getId() {
         return id;
@@ -73,6 +65,14 @@ public class WalletDto {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
+    public String getDateOfJoiningBalance() {
+        return dateOfJoiningBalance;
+    }
+
+    public void setDateOfJoiningBalance(String dateOfJoiningBalance) {
+        this.dateOfJoiningBalance = dateOfJoiningBalance;
+    }
+
 
     @Override
     public String toString() {

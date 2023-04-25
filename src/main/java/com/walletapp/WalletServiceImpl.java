@@ -102,5 +102,15 @@ public class WalletServiceImpl implements WalletService {
     public Collection<WalletDto> getAllWallets() {
         return this.walletJpaRepository.findAll();
     }
+
+    @Override
+    public WalletDto registerWallet(WalletDto wallet) {
+        return null;
     }
+
+    @Override
+    public void getWalletById(int i) {
+
+    }
+}
 

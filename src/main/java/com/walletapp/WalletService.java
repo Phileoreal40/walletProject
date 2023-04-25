@@ -20,5 +20,7 @@ public interface WalletService {
    public Collection<WalletDto> getAllWallets();
 
 
+    WalletDto registerWallet(WalletDto wallet);
 
+    void getWalletById(int i);
 }

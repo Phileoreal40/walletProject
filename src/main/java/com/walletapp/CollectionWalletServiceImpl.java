@@ -74,9 +74,15 @@ public class CollectionWalletServiceImpl implements WalletService{
 
     }
 
+    @Override
+    public WalletDto registerWallet(WalletDto wallet) {
+        return null;
+    }
 
+    @Override
+    public void getWalletById(int i) {
 
-
+    }
 
 
 }
